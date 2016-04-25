@@ -156,13 +156,17 @@ function templateList(table, pager, sizeBlock, asyncCompleteHandler, custom_page
     // Cache search field
     //var searchField = s();
 
-    var cmsnav = '0'; //s('#cmsnav_id').val();
-    if (s('#cmsnav_id').val().length) {
-        cmsnav = s('#cmsnav_id').val();
-    }
+    // var cmsnav = '0'; //s('#cmsnav_id').val();
+    // if (s('#cmsnav_id').val().length) {
+    //     cmsnav = s('#cmsnav_id').val();
+    // }
+    
+      // Cache search field (this id must have in sub_menu)
+    var cmsnav = s('input#search').a('data-structure-id');
 
     // Init table live search
-    s('input#search').search(new Array(cmsnav), function(){
+    s('input#search').search([cmsnav], function(){
+    //s('input#search').search(new Array(cmsnav), function(){
         // Create generic loader
         var loader = new Loader(table);
         // Show loader with i18n text and black bg
