@@ -2,16 +2,21 @@
  * Created by egorov on 10.04.2015.
  */
 s('.template-menu').pageInit(function (menu) {
+    // Save block to value
+    var subMenuBlock = s('.template-sub-menu');
+
+    // Size window with open sub-menu
+    var windowSubMenuWidth = 1000;
+
     var collapse2 = s('.collapser').click(function (clicked) {
-        s('.template-sub-menu').toggleClass('collapsed');
+        subMenuBlock.toggleClass('collapsed');
     });
+
+    // Automatic hidden sub-menu
+    automaticHiddenSubMenu(subMenuBlock, windowSubMenuWidth);
 
     // added animation to left (big) menu
     var bigMenu = $('.template-menu');
-    var smallMenu = s('.template-sub-menu');
-    var rightBlock = s('#template-container');
-    var bigMenuWidth = 150;
-    var smallMenuWidth = 50;
 
     bigMenu.mouseleave(function () {
         bigMenu.addClass('minimized');
@@ -63,5 +68,24 @@ var tilesInit = function() {
         if(table.elements !== null) {
             initContentWidth();
         }
+    }
+};
+
+/**
+ * Function which automatic hidden sub-menu
+ * @param subMenuBlock - DOM element
+ * @param windowWidth - window size with open sub-menu
+ */
+var automaticHiddenSubMenu = function(subMenuBlock, windowWidth) {
+    // After window resize
+    s(window).resize(function() {
+        if (innerWidth < windowWidth && !subMenuBlock.hasClass('collapsed')) {
+            subMenuBlock.toggleClass('collapsed');
+        }
+    });
+
+    // If window width smaller value - hide submenu
+    if (innerWidth < windowWidth) {
+        subMenuBlock.toggleClass('collapsed');
     }
 };
