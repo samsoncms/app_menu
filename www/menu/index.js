@@ -10,10 +10,16 @@ s('.template-menu').pageInit(function (menu) {
 
     var collapse2 = s('.collapser').click(function (clicked) {
         subMenuBlock.toggleClass('collapsed');
+        // Remove or add class to active checked triangle (in right menu)
+        s('.active').toggleClass('hover-triangle');
     });
 
     // Automatic hidden sub-menu
     automaticHiddenSubMenu(subMenuBlock, windowSubMenuWidth);
+
+    // Value which saved sub-menu
+    var smallMenu = $('.template-sub-menu');
+    hoverTriangle(smallMenu);
 
     // added animation to left (big) menu
     var bigMenu = $('.template-menu');
@@ -88,4 +94,22 @@ var automaticHiddenSubMenu = function(subMenuBlock, windowWidth) {
     if (innerWidth < windowWidth) {
         subMenuBlock.toggleClass('collapsed');
     }
+};
+
+/**
+ * Function which added hover effect to active item
+ * @param smallMenu - DOM element sub-menu
+ */
+var hoverTriangle = function(smallMenu) {
+    // When cursor leave
+    smallMenu.mouseleave(function () {
+        s('.active').removeClass('hover-triangle');
+    });
+    // When cursor income
+    smallMenu.mouseenter(function () {
+        // If sub-menu is collapsed
+        if (s('.template-sub-menu').hasClass('collapsed')) {
+            s('.active').addClass('hover-triangle');
+        }
+    });
 };
