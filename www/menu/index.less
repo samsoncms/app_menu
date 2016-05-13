@@ -78,10 +78,17 @@
         opacity: 1;
         position: relative;
 
+        &.hover-triangle {
+          &:before {
+            border-right: 8px solid #788AA3;
+          }
+        }
+
         &:before {
+          .transition(all, @animation-duration);
           content: '';
           border-top: 9px solid transparent;
-          border-right: 8px solid #6b7f9b;
+          border-right: 8px solid @sub-menu-bg-color;
           border-bottom: 9px solid transparent;
           position: absolute;
           right: 0;
@@ -133,7 +140,7 @@
 
         span {
           opacity: 1;
-          min-width: 4.5*@padding;
+          min-width: 5*@padding;
           text-align: left;
           display: table-cell;
           font-size: @menu-text-size;
